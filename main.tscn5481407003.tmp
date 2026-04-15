@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bwtnlfyl4args"]
+
+[ext_resource type="Script" uid="uid://dh7l2oqqx8xqu" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://dd87pddvhg2j2" path="res://wall.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dh1r2blj2b42d" path="res://ball.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://hetofrj8n5ml" path="res://paddle_body.tscn" id="5_lquwl"]
+
+[node name="Main" type="Node" unique_id=952606546]
+script = ExtResource("1_0xm2m")
+
+[node name="Player1StartingPos" type="Marker2D" parent="." unique_id=909160482]
+
+[node name="Player2StartingPos" type="Marker2D" parent="." unique_id=951888760]
+
+[node name="WallTop" parent="." unique_id=1088963349 instance=ExtResource("3_h2yge")]
+
+[node name="WallBottom" parent="." unique_id=30733440 instance=ExtResource("3_h2yge")]
+position = Vector2(0, 648)
+
+[node name="Ball" parent="." unique_id=1590465064 instance=ExtResource("4_1bvp3")]
+
+[node name="PlayerBody1" parent="." unique_id=703126126 instance=ExtResource("5_lquwl")]
+position = Vector2(865, 149)
+
+[node name="PlayerBody2" parent="." unique_id=38642168 instance=ExtResource("5_lquwl")]
+position = Vector2(993, 297)
