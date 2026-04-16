@@ -19,8 +19,6 @@ func _ready() -> void:
 	
 	$LeftScore.position.x = screen_size.x / 2 - 100
 	$RightScore.position.x = screen_size.x / 2 + 100
-	
-
 
 func _on_ball_left_scored_on() -> void:
 	game_setup(0.25)

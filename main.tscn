@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://dh7l2oqqx8xqu" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://dd87pddvhg2j2" path="res://wall.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dh1r2blj2b42d" path="res://ball.tscn" id="4_1bvp3"]
+[ext_resource type="Script" uid="uid://cok0nhvtpcgee" path="res://paddle_body.gd" id="5_5vw27"]
 [ext_resource type="PackedScene" uid="uid://dowqhn44fd8h1" path="res://goal.tscn" id="5_7mycd"]
+[ext_resource type="Script" uid="uid://cpp6js3cybo0v" path="res://paddle_body_ai.gd" id="5_272bh"]
 [ext_resource type="PackedScene" uid="uid://hetofrj8n5ml" path="res://paddle_body.tscn" id="5_lquwl"]
 
 [node name="Main" type="Node" unique_id=952606546]
@@ -21,8 +23,10 @@ position = Vector2(0, 648)
 [node name="Ball" parent="." unique_id=1590465064 instance=ExtResource("4_1bvp3")]
 
 [node name="PlayerBody1" parent="." unique_id=703126126 instance=ExtResource("5_lquwl")]
+script = ExtResource("5_5vw27")
 
 [node name="PlayerBody2" parent="." unique_id=38642168 instance=ExtResource("5_lquwl")]
+script = ExtResource("5_272bh")
 
 [node name="GoalLeft" parent="." unique_id=989430471 instance=ExtResource("5_7mycd")]
 position = Vector2(-10, 0)
