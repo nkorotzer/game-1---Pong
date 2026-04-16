@@ -1,10 +1,12 @@
 extends CharacterBody2D
 
-
-@export var speed = 700.0
+var speed
+@export var starting_speed = 700.0
 signal left_scored_on
 signal right_scored_on
 
+func _ready() -> void:
+	starting_speed = speed
 
 func _physics_process(delta: float) -> void:
 	var collision = move_and_collide(velocity * delta)
@@ -23,5 +25,5 @@ func _physics_process(delta: float) -> void:
 func load(_position, _direction):
 	position = _position
 	rotation = _direction
-	speed = 700
+	speed = starting_speed
 	velocity = Vector2(speed, 0).rotated(rotation)

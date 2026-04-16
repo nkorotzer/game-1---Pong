@@ -1,7 +1,7 @@
 extends AnimatableBody2D
 
 
-@export var ai_speed = 300
+@export var ai_speed = 500
 var screen_size
 var shape_size
 
@@ -18,22 +18,19 @@ func _ready() -> void:
 	shape_size = _rect_size * _scale
 
 func _physics_process(delta: float) -> void:
-	var dir = 0
 	get_ball()
-	if _ball.position.y > position.y:
-		dir = 1
-	elif _ball.position.y < position.y:
-		dir = -1
 	
-	var velocity = Vector2.ZERO
-	if run_once:
-		velocity = Vector2.ONE * dir * ai_speed
-		velocity.x = 0
-		run_once = 0
-	elif _ball.position.x > _ball_last_x:
-		velocity = Vector2.ONE * dir * ai_speed
-		velocity.x = 0
-	move_and_collide(velocity * delta)
+	var dir = get_direction()
+	var velocity = get_velocity(dir)
+	
+	var new_pos_y = position.y + velocity.y * delta
+	var collision = move_and_collide(velocity * delta)
+	
+	if dir == 1 and new_pos_y > _ball.position.y and not collision:
+		position.y = _ball.position.y
+	elif dir == -1 and new_pos_y < _ball.position.y and not collision:
+		position.y = _ball.position.y
+	
 	_ball_last_x = _ball.position.x
 
 func load(pos):
@@ -43,3 +40,28 @@ func get_ball():
 	var Ball = get_node("/root/Main/Ball")
 	if Ball:
 		_ball = Ball
+
+func get_direction() -> int:
+	var dir = 0
+	
+	if _ball.position.y > position.y:
+#		dir == 1: going down
+		dir = 1
+	elif _ball.position.y < position.y:
+#		dir == -1: going up
+		dir = -1
+	
+	return dir
+	
+func get_velocity(dir) -> Vector2:
+	var velocity = Vector2.ZERO
+	
+	if run_once:
+		velocity = Vector2.ONE * dir * ai_speed
+		velocity.x = 0
+		run_once = 0
+	elif _ball.position.x > _ball_last_x:
+		velocity = Vector2.ONE * dir * ai_speed
+		velocity.x = 0
+	
+	return velocity
