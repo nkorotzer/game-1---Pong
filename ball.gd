@@ -17,9 +17,16 @@ func _physics_process(delta: float) -> void:
 		elif collision.get_collider().name == "GoalRight":
 			right_scored_on.emit()
 		
-		var normal = collision.get_normal()
-		var dir = velocity.bounce(normal).normalized()
-		velocity = dir * speed
+		if collision.get_collider().name == "PlayerBody1":
+			var paddle_velocity = collision.get_collider_velocity()
+			var normal = collision.get_normal()
+			var ball_velocity_after_bounce = velocity.bounce(normal)
+			var new_dir = (paddle_velocity + ball_velocity_after_bounce).normalized()
+			velocity = new_dir * speed
+		else:
+			var normal = collision.get_normal()
+			var dir = velocity.bounce(normal).normalized()
+			velocity = dir * speed
 		speed += 10
 
 func load(_position, _direction):
